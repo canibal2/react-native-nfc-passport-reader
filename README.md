@@ -1,4 +1,4 @@
-# react-native-nfc-passport-reader
+# @better-network/react-native-nfc-passport-reader
 
 This package is a React native wrapper which handles reading an NFC Enabled passport using iOS 13 CoreNFC APIS
 
@@ -19,7 +19,7 @@ import { scanPassport } from '@better-network/react-native-nfc-passport-reader';
       if (result.error) {
         // Errors during card scanning
       }
-      // Here you can access the resukt
+      // Here you can access the result
     }).catch(err => {
       console.log(err)
     })
