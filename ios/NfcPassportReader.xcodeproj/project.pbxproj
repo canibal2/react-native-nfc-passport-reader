@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E555C0D2413F4C50049A1A2 /* NfcPassportReader.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* NfcPassportReader.m */; };
-		F4FF95D7245B92E800C19C63 /*  NfcPassportReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /*  NfcPassportReader.swift */; };
+		55CEE7E1292A92F300842192 /* PassportUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEE7E0292A92F300842192 /* PassportUtils.swift */; };
+		55CEE7E3292A930D00842192 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CEE7E2292A930D00842192 /* SettingsStore.swift */; };
+		F4FF95D7245B92E800C19C63 /* NfcPassportReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF95D6245B92E800C19C63 /* NfcPassportReader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,9 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libNfcPassportReader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNfcPassportReader.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		550E192E292ABF36000F1E9D /* masterList.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = masterList.pem; sourceTree = "<group>"; };
+		55CEE7E0292A92F300842192 /* PassportUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassportUtils.swift; sourceTree = "<group>"; };
+		55CEE7E2292A930D00842192 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* NfcPassportReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NfcPassportReader.m; sourceTree = "<group>"; };
 		F4FF95D5245B92E700C19C63 /* NfcPassportReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NfcPassportReader-Bridging-Header.h"; sourceTree = "<group>"; };
 		F4FF95D6245B92E800C19C63 /* NfcPassportReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfcPassportReader.swift; sourceTree = "<group>"; };
@@ -49,9 +53,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		55CEE7DF292A92D300842192 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				55CEE7E0292A92F300842192 /* PassportUtils.swift */,
+				55CEE7E2292A930D00842192 /* SettingsStore.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				550E192E292ABF36000F1E9D /* masterList.pem */,
+				55CEE7DF292A92D300842192 /* Model */,
 				F4FF95D6245B92E800C19C63 /* NfcPassportReader.swift */,
 				B3E7B5891CC2AC0600A0062D /* NfcPassportReader.m */,
 				F4FF95D5245B92E700C19C63 /* NfcPassportReader-Bridging-Header.h */,
@@ -117,7 +132,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4FF95D7245B92E800C19C63 /* NfcPassportReader.swift in Sources */,
-				B3E7B58A1CC2AC0600A0062D /* NfcPassportReader.m in Sources */,
+				55CEE7E3292A930D00842192 /* SettingsStore.swift in Sources */,
+				55CEE7E1292A92F300842192 /* PassportUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

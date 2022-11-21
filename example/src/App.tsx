@@ -1,18 +1,31 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-nfc-passport-reader';
+import { scanPassport } from '@better-network/react-native-nfc-passport-reader';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [_, setResult] = React.useState<any | undefined>();
+  const [__, setError] = React.useState<any | undefined>();
 
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+  const scanP = () => {
+    scanPassport({
+      birthDate: "",
+      passportNumber: "",
+      expiryDate: "",
+      useNewVerificationMethod: true
+    }).then((res) => {
+      if (res.error) {
+        setError(res.error)
+      }
+      setResult(res)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <TouchableOpacity onPress={scanP}><Text>Scan</Text></TouchableOpacity>
     </View>
   );
 }
@@ -22,6 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: "white"
   },
   box: {
     width: 60,

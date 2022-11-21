@@ -1,4 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
+import type { PassportOptions } from './interfaces/PassportOptions';
 
 const LINKING_ERROR =
   `The package 'react-native-nfc-passport-reader' doesn't seem to be linked. Make sure: \n\n` +
@@ -9,14 +10,16 @@ const LINKING_ERROR =
 const NfcPassportReader = NativeModules.NfcPassportReader
   ? NativeModules.NfcPassportReader
   : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+    {},
+    {
+      get() {
+        throw new Error(LINKING_ERROR);
+      },
+    }
+  );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return NfcPassportReader.multiply(a, b);
+export function scanPassport(options: PassportOptions): Promise<{ [key: string]: string }> {
+  return NfcPassportReader.scanPassport(options);
 }
+
+export * from "./interfaces";

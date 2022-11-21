@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-nfc-passport-reader": ["./src/index"]
+      "@better-network/react-native-nfc-passport-reader": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
