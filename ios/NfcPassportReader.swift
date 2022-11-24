@@ -123,7 +123,7 @@ class NfcPassportReader: NSObject {
                 resolve(dict)
             }
             if error != nil {
-                resolve(error!.localizedDescription)
+                resolve(["error", error!.localizedDescription])
             }
         })
     }
