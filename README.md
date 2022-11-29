@@ -11,15 +11,19 @@ npm install @better-network/react-native-nfc-passport-reader
 ## Usage
 
 ```js
-import { scanPassport } from '@better-network/react-native-nfc-passport-reader';
+import { scanPassport, NFCPassportModel } from '@better-network/react-native-nfc-passport-reader';
 
-// birthdate & expiryDate must be in the format yyMMdd
- scanPassport({ birthDate: "", passportNumber: "", expiryDate: "", useNewVerificationMethod: true})
- .then((result) => {
-      if (result.error) {
-        // Errors during card scanning
+// birthdate & expiryDate must be of type iso8601 string
+ scanPassport({
+    birthDate: "",
+    expiryDate: "",  
+    passportNumber: "",
+    useNewVerificationMethod: true
+  }).then((result) => {
+      if ('error' in result) {
+        // Errors during scanning session
       }
-      // Here you can access the result
+      // Do something with result of type NFCPassportModel
     }).catch(err => {
       console.log(err)
     })
@@ -32,7 +36,3 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 ## License
 
 MIT
-
----
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
