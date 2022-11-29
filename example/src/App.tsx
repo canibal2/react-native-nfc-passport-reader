@@ -1,10 +1,13 @@
 import * as React from 'react';
 
-import { scanPassport } from '@better-network/react-native-nfc-passport-reader';
+import {
+  NFCPassportModel,
+  scanPassport,
+} from '@better-network/react-native-nfc-passport-reader';
 import { Alert, Button, StyleSheet, View } from 'react-native';
 
 export default function App() {
-  const [_, setResult] = React.useState<any | undefined>();
+  const [_, setResult] = React.useState<NFCPassportModel>();
 
   const scanDocument = () => {
     scanPassport({
@@ -12,17 +15,13 @@ export default function App() {
       expiryDate: '2024-12-12T00:00:00Z',
       passportNumber: 'BR3484971',
       useNewVerificationMethod: true,
-    })
-      .then((res) => {
-        if (res.error) {
-          Alert.alert('NFC failed!', res.error);
-          return;
-        }
-        setResult(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) => {
+      if ('error' in res) {
+        Alert.alert('NFC failed!', res.error);
+        return;
+      }
+      setResult(res);
+    });
   };
 
   return (

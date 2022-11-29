@@ -1,4 +1,5 @@
 import { NativeModules, Platform } from 'react-native';
+import type { NFCPassportModel } from './interfaces';
 import type { PassportOptions } from './interfaces/PassportOptions';
 
 const LINKING_ERROR =
@@ -20,7 +21,7 @@ const NfcPassportReader = NativeModules.NfcPassportReader
 
 export function scanPassport(
   options: PassportOptions
-): Promise<{ [key: string]: string }> {
+): Promise<NFCPassportModel | { error: string }> {
   return NfcPassportReader.scanPassport(options);
 }
 
