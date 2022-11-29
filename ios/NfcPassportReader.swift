@@ -26,23 +26,34 @@ class NfcPassportReader: NSObject {
     
     @objc(scanPassport:withResolver:withRejecter:)
     func scanPassport(options: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+        
+        guard let passportNumber = options.value(forKey: "passportNumber") as? String else {
+            resolve(["error": "Please provide a passportNumber"])
+            return
+        }
 
-        let dp = DateFormatter()
-        dp.dateFormat = "YYMMdd"
+        let iso8601Formatter = ISO8601DateFormatter()
         
-        let df = DateFormatter()
-        df.timeZone = TimeZone(secondsFromGMT: 0)
-        df.dateFormat = "YYMMdd"
+        guard let isoBirthDate = iso8601Formatter.date(from: options.value(forKey: "birthDate") as! String) else {
+           resolve(["error": "Unable to parse birthdate, please provide an iso8601 string."])
+           return
+        }
         
-        let bDate = dp.date(from:options.value(forKey: "birthDate") as! String)
-        let eDate = dp.date(from:options.value(forKey: "expiryDate") as! String)
+        guard let isoExpiryDate = iso8601Formatter.date(from: options.value(forKey: "expiryDate") as! String) else {
+            resolve(["error": "Unable to parse expiryDate, please provide an iso8601 string."])
+            return
+        }
         
-        let passportNumber = options.value(forKey: "passportNumber") as! String
-        let birthDate = df.string(from: bDate!)
-        let expiryDate = df.string(from: eDate!)
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        dateFormatter.dateFormat = "YYMMdd"
+                
+        let dateOfBirth = dateFormatter.string(from: isoBirthDate)
+        let dateOfExpiry = dateFormatter.string(from: isoExpiryDate)
         
         let passportUtils = PassportUtils()
-        let mrzKey = passportUtils.getMRZKey(passportNumber: passportNumber, dateOfBirth: birthDate, dateOfExpiry: expiryDate)
+        let mrzKey = passportUtils.getMRZKey(passportNumber: passportNumber, dateOfBirth: dateOfBirth, dateOfExpiry: dateOfExpiry)
         // Set the masterListURL on the Passport Reader to allow auto passport verification
         let masterListURL = Bundle.main.url(forResource: "masterList", withExtension: ".pem")!
         passportReader.setMasterListURL( masterListURL )
@@ -123,7 +134,7 @@ class NfcPassportReader: NSObject {
                 resolve(dict)
             }
             if error != nil {
-                resolve(["error", error!.localizedDescription])
+                resolve(["error": error!.localizedDescription])
             }
         })
     }

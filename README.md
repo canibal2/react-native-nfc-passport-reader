@@ -13,7 +13,7 @@ npm install @better-network/react-native-nfc-passport-reader
 ```js
 import { scanPassport } from '@better-network/react-native-nfc-passport-reader';
 
-// ...
+// birthdate & expiryDate must be in the format yyMMdd
  scanPassport({ birthDate: "", passportNumber: "", expiryDate: "", useNewVerificationMethod: true})
  .then((result) => {
       if (result.error) {

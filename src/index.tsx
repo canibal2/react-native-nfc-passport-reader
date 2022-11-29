@@ -10,16 +10,18 @@ const LINKING_ERROR =
 const NfcPassportReader = NativeModules.NfcPassportReader
   ? NativeModules.NfcPassportReader
   : new Proxy(
-    {},
-    {
-      get() {
-        throw new Error(LINKING_ERROR);
-      },
-    }
-  );
+      {},
+      {
+        get() {
+          throw new Error(LINKING_ERROR);
+        },
+      }
+    );
 
-export function scanPassport(options: PassportOptions): Promise<{ [key: string]: string }> {
+export function scanPassport(
+  options: PassportOptions
+): Promise<{ [key: string]: string }> {
   return NfcPassportReader.scanPassport(options);
 }
 
-export * from "./interfaces";
+export * from './interfaces';
